@@ -13,7 +13,7 @@
 - `opencv-python: 4.5.5.64`
 - `CUDAVersion: 11.4`
 ## 代码结构
-&emsp;&emsp;一共有五个主要文件，分别是`dataset.py`,`seed.py`,`model.py`,`train.py`,`main.py`,每个文件的作用如下：
+&emsp;&emsp;一共有六个主要文件，分别是`dataset.py`,`seed.py`,`model.py`,`train.py`,`main.py`,`visualize.py`,每个文件的作用如下：
 - `dataset.py`: 处理数据集以及通过PGD生成对抗样本
 - `seed.py`: 设置种子，确保实验可复现
 - `model.py`: 定义了卷积神经网络，PGD，量化的卷积和线性层，以及动态阈值的激活函数
