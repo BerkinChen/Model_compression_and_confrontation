@@ -129,3 +129,10 @@
 &emsp;&emsp;对于防御措施，加入对抗训练是最有效的防御手段，能将攻击后准确率提高的50%左右，同时模型量化和加入谱范数正则项也有不错的效果。在没有对抗训练时加入动态阈值的激活函数反而引起了性能下降，可能是因为数据集太小或者超参数的设定问题，但加入对抗训练之后加入动态阈值的激活函数也可以提高一些性能，featuer squeezing也能得到一定的效果
 
 &emsp;&emsp;对于PGD的攻击效果，参数eps越大攻击效果越好，说明限制越宽松，攻击效果越好；参数alpha在0.02到0.03之间时，攻击效果越好，alpha相当于每一步攻击的“步幅”，“步幅”过大或者过小，都不能达到比较好的攻击效果（和学习率有点像）；参数step是攻击的迭代次数，可以看到迭代次数越多攻击效果越好
+
+#### 参考
+1. https://github.com/muyuuuu/Adversarial-Attack
+2. https://github.com/MrGoriay/pwlu-pytorch
+3. https://arxiv.org/pdf/1704.01155.pdf
+4. https://arxiv.org/abs/2104.03693
+5. https://arxiv.org/abs/1706.06083
