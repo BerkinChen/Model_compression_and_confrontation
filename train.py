@@ -16,7 +16,11 @@ def train(dataloader, model, loss_fn, optimizer, adversarial=False, regularizati
         model (nn.Module): The Module
         loss_fn (nn.function): The loss function
         optimizer (Optimizer): The Optimizer in training
+        adversarial (bool): Whether to use adversarial training. Defaults to False.
+        regularization (str): The to use regularization training. Defaults to None.
+        beta (float): The regularization hyperparameters. Defaults to 1e-4
         device (str, optional): The device to use of the training. Defaults to 'cpu'.
+        verbose (bool, optional): Whether to visualize the training process. Defaults to True.
     """
     size = len(dataloader.dataset)
     pgd = PGD(model)
@@ -52,13 +56,18 @@ def train(dataloader, model, loss_fn, optimizer, adversarial=False, regularizati
 
 
 def test(dataloader, model, loss_fn, device='cpu', feature_squeeze=None,verbose=True):
-    """The test function
+    """The Test function
 
     Args:
         dataloader (DataLoader): The test DataLoader, which can be the return of DataLoader()
         model (nn.Module): The Module
         loss_fn (nn.function): The loss function
-        device (str, optional): The device to use of the test. Defaults to 'cpu'.
+        device (str, optional): The device to use of the training. Defaults to 'cpu'.
+        feature_squeeze (str, optional): The type of feature squeeze to use. Defaults to None.
+        verbose (bool, optional): Whether to visualize the test results. Defaults to True.
+
+    Returns:
+        _type_: _description_
     """
     size = len(dataloader.dataset)
     batch_num = len(dataloader)
@@ -84,7 +93,20 @@ def test(dataloader, model, loss_fn, device='cpu', feature_squeeze=None,verbose=
     return correct
 
 
-def show_img(img, label, model, loss_fn, eps=8/255, alpha =2/255 ,steps=4,device='cpu',output='result'):
+def show_img(img, label, model, loss_fn, eps=8/255, alpha =2/255 ,steps=4, device='cpu',output='result'):
+    """The function to show the image of PGD attacks results
+
+    Args:
+        img (Tensor): The image Tensor
+        label (Tensor): The label of the image
+        model (nn.Module): The Module
+        loss_fn (nn.function): The loss function
+        eps (float, optional): The hyperparameter of PGD attack. Defaults to 8/255.
+        alpha (float, optional): The hyperparameter of PGD attack. Defaults to 2/255.
+        steps (int, optional):The hyperparameter of PGD attack. Defaults to 4.
+        device (str, optional): The device to use. Defaults to 'cpu'.
+        output (str, optional): The file to save the results image. Defaults to 'result'.
+    """
     classes = ('plane', 'car', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck')
     dataset = CIFAR10(is_transform=True, normalize=False)

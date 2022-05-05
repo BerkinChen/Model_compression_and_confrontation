@@ -5,7 +5,7 @@ import torch.nn as nn
 import random
 import numpy as np
 import math
-from torch import nn
+from torch import Tensor, nn
 import torch
 from torch.nn import quantized
 from scipy import ndimage
@@ -16,8 +16,13 @@ class Covnet(nn.Module):
     """A Simple net to test the code
     """
 
-    def __init__(self, device='cpu', quant=False, dynamic=False):
-        """The init function of Simple net
+    def __init__(self, device='cpu', quant=False, dynamic=False) ->None:
+        """The init function of the Covnet
+
+        Args:
+            device (str, optional): The device to use. Defaults to 'cpu'.
+            quant (bool, optional): Whether to use quantlization. Defaults to False.
+            dynamic (bool, optional): Whether to use dynamic active function . Defaults to False.
         """
         super(Covnet, self).__init__()
         self.device = device
@@ -100,7 +105,7 @@ class Covnet(nn.Module):
                 Dynamic_Relu(dimensions=1),
                 Linear(84, 10),).to(self.device)
 
-    def forward(self, x):
+    def forward(self, x) ->Tensor:
         """The forward function
 
         Args:
@@ -112,15 +117,26 @@ class Covnet(nn.Module):
         x = self.net(x)
         return x
 
-    def reconstruct(self):
+    def reconstruct(self) -> None:
+        """Reconstruct the weight of the quantized layer before backward
+        """
         if self.quant == True:
             for layer in self.net:
                 if type(layer) == Linear or type(layer) == Conv:
                     layer.reconstruct()
 
     def regularizationTerm(self, reg_type, beta=1e-4):
-        """
-            reg_type: orthogonal 正交正则项; spectral 谱范数正则项
+        """The regularzation of training
+
+        Args:
+            reg_type (str): The regularization type. Use "orthogonal" or "spectral"
+            beta (float, optional): The hyperparameters of the regularzation. Defaults to 1e-4.
+
+        Raises:
+            NotImplementedError: reg_type must be "orthogonal" or "spectral".
+
+        Returns:
+            float: The regularization result.
         """
         term = 0.0
         if reg_type == "orthogonal":
@@ -248,13 +264,25 @@ class PGD():
 
 
 class Conv(nn.Conv2d):
+    """The quantized Conv2d, have quant method and reconstruct method
+    """
     def __init__(self, *args, **kwargs):
         super(Conv, self).__init__(*args, **kwargs)
 
     def reconstruct(self):
+        """The reconstruct function, to reconstruct the orignal_weight
+        """
         self.weight.data = self.orignal_weight
 
     def quant(self, x):
+        """The quant function, to quantize a tensor
+
+        Args:
+            x (Tensor): The tensor to reconstruct
+
+        Returns:
+            Tensor: The tensor after reconstruct
+        """
         x_new = torch.abs(x)
         max_v = torch.max(x_new)
         scale = max_v/torch.tensor(127)
@@ -272,6 +300,8 @@ class Conv(nn.Conv2d):
 
 
 class Linear(nn.Linear):
+    """The quantized Liner, have quant method and reconstruct method
+    """
     def __init__(self, *args, **kwargs):
         super(Linear, self).__init__(*args, **kwargs)
 
@@ -363,7 +393,15 @@ class Dynamic_Relu(torch.nn.Module):
             torch.linspace(self.Bl.item(), self.Br.item(), self.N+1)).to(device))
     
 class Feature_Squeezing():
+    """The feature_squeeze class
+    """
     def __init__(self,mode='b',device='cpu'):
+        """The init function of the class
+
+        Args:
+            mode (str, optional): The mode of feature_squeeze. Defaults to 'b'.
+            device (str, optional): The device to use. Defaults to 'cpu'.
+        """
         self.mode=mode
         self.device=device
         

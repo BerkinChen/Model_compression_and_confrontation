@@ -46,6 +46,7 @@ if __name__ == '__main__':
    args.add_argument('-show', dest='show', default=False, action='store_true')
    args = args.parse_args()
 
+   # set seed and initalize parameters
    if args.random is False:
       setup_seed(1)
    device = args.device
@@ -56,6 +57,7 @@ if __name__ == '__main__':
    net = Covnet(device=device, quant=args.quant, dynamic=args.dynamic)
    optimizer = optim.Adam(net.parameters(), lr=lr)
 
+   # set the file name and enviroument name
    file_name = 'checkpoint/checkpoint'
    evn = ''
    if args.adversarial is True:
@@ -76,10 +78,12 @@ if __name__ == '__main__':
    if evn == '':
       evn = 'default_'
 
+   # load the dataset
    dataset = CIFAR10(is_transform=True, batch_size=batch_size)
    train_loader = dataset.train_set
    test_loader = dataset.test_set
 
+   # traing
    if args.adversarial is False:
       if args.load is False:
          best_acc = 0.0
@@ -125,6 +129,8 @@ if __name__ == '__main__':
             net.load_state_dict(torch.load(file_name))
    if os.path.exists(file_name) and args.save is True:
       net.load_state_dict(torch.load(file_name))
+   
+   # generate adversarial examples
    if args.dynamic is True:
        for layer in net.net:
            if type(layer) == Dynamic_Relu:
@@ -132,6 +138,8 @@ if __name__ == '__main__':
    ad_data_dataset = Adversarial_examples(
       test_loader, net, loss, device=device)
    ad_data_loader = DataLoader(ad_data_dataset, batch_size=batch_size)
+   
+   # test and report the results
    ori_stdout = sys.stdout
    if args.no_report is False:
       with open('results.txt', 'a') as f:
@@ -142,6 +150,8 @@ if __name__ == '__main__':
             test(ad_data_loader, net, loss, feature_squeeze=args.feature_squeeze,device=device)
          print('----------------------------------')
       sys.stdout = ori_stdout
+      
+   # show the image of attack results
    if args.show is True:
       for X,y in test_loader:
          X = X.to(device)
