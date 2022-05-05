@@ -1,0 +1,102 @@
+----------default_-------------
+Test Error: Accuracy: 73.8%, Avg loss: 1.003329 
+
+Test Error: Accuracy: 17.9%, Avg loss: 4.302364 
+
+----------------------------------
+----------quant_-------------
+Test Error: Accuracy: 72.9%, Avg loss: 0.821388 
+
+Test Error: Accuracy: 25.5%, Avg loss: 2.747950 
+
+----------------------------------
+----------adversarial_quant_-------------
+Test Error: Accuracy: 72.3%, Avg loss: 1.008590 
+
+Test Error: Accuracy: 51.1%, Avg loss: 1.519900 
+
+----------------------------------
+----------quant_dynamic_-------------
+Test Error: Accuracy: 73.9%, Avg loss: 0.945623 
+
+Test Error: Accuracy: 25.1%, Avg loss: 3.221374 
+
+----------------------------------
+----------adversarial_-------------
+Test Error: Accuracy: 72.1%, Avg loss: 1.063047 
+
+Test Error: Accuracy: 49.8%, Avg loss: 1.587150 
+
+----------------------------------
+----------orthogonal_-------------
+Test Error: Accuracy: 73.4%, Avg loss: 0.816281 
+
+Test Error: Accuracy: 22.6%, Avg loss: 2.818846 
+
+----------------------------------
+----------orthogonal_quant_-------------
+Test Error: Accuracy: 73.0%, Avg loss: 0.837009 
+
+Test Error: Accuracy: 22.9%, Avg loss: 2.972984 
+
+----------------------------------
+----------spectral_-------------
+Test Error: Accuracy: 74.4%, Avg loss: 0.773384 
+
+Test Error: Accuracy: 24.2%, Avg loss: 2.652972 
+
+----------------------------------
+----------spectral_quant_-------------
+Test Error: Accuracy: 74.5%, Avg loss: 0.797531 
+
+Test Error: Accuracy: 22.9%, Avg loss: 2.913567 
+
+----------------------------------
+----------adversarial_orthogonal_-------------
+Test Error: Accuracy: 72.4%, Avg loss: 0.929910 
+
+Test Error: Accuracy: 50.7%, Avg loss: 1.476034 
+
+----------------------------------
+----------adversarial_spectral_-------------
+Test Error: Accuracy: 73.1%, Avg loss: 0.875136 
+
+Test Error: Accuracy: 51.5%, Avg loss: 1.438640 
+
+----------------------------------
+----------spectral_quant_dynamic_-------------
+Test Error: Accuracy: 74.5%, Avg loss: 0.797531 
+
+Test Error: Accuracy: 22.9%, Avg loss: 2.913566 
+
+----------------------------------
+----------adversarial_quant_dynamic_-------------
+Test Error: Accuracy: 73.8%, Avg loss: 0.867138 
+
+Test Error: Accuracy: 53.8%, Avg loss: 1.395076 
+
+----------------------------------
+----------l_-------------
+Test Error: Accuracy: 69.2%, Avg loss: 1.173443 
+
+Test Error: Accuracy: 29.4%, Avg loss: 3.069402 
+
+----------------------------------
+----------b_-------------
+Test Error: Accuracy: 73.5%, Avg loss: 1.005639 
+
+Test Error: Accuracy: 23.6%, Avg loss: 3.670633 
+
+----------------------------------
+----------n_-------------
+Test Error: Accuracy: 18.9%, Avg loss: 4.019971 
+
+Test Error: Accuracy: 25.1%, Avg loss: 3.480312 
+
+----------------------------------
+----------adversarial_spectral_quant_dynamic_-------------
+Test Error: Accuracy: 72.9%, Avg loss: 0.935430 
+
+Test Error: Accuracy: 52.6%, Avg loss: 1.456144 
+
+----------------------------------
