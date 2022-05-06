@@ -1,6 +1,7 @@
 # 模型对抗与模型压缩
 ## 介绍
 &emsp;&emsp;此项目是模型对抗与模型压缩大作业，详细的要求可以参考`notebook.ipynb`，此项目很好的实现了作业中的要求，并且完成了附加题中的feature squeezing，代码结构较好，程序健壮性高，能够支持对给出的防御方法进行不同的组合测试
+
 &emsp;&emsp;代码中有较为详细的注释，并附有详细的说明文档来使用，同时可以很容易地复现下文中给出的结果
 ## 版本
 - `python: 3.8.12`
@@ -12,7 +13,7 @@
 - `opencv-python: 4.5.5.64`
 - `CUDAVersion: 11.4`
 ## 代码结构
-&emsp;&emsp;一共有五个主要文件，分别是`dataset.py`,`seed.py`,`model.py`,`train.py`,`main.py`,每个文件的作用如下：
+&emsp;&emsp;一共有六个主要文件，分别是`dataset.py`,`seed.py`,`model.py`,`train.py`,`main.py`,`visualize.py`,每个文件的作用如下：
 - `dataset.py`: 处理数据集以及通过PGD生成对抗样本
 - `seed.py`: 设置种子，确保实验可复现
 - `model.py`: 定义了卷积神经网络，PGD，量化的卷积和线性层，以及动态阈值的激活函数
