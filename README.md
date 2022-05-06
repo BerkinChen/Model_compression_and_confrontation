@@ -56,6 +56,21 @@
 例如
 > `python visualize.py -aim alpha -d cuda:1`
 
+## 实现
+
+### 数据集
+&emsp;&emsp;`dataset.py`中定义了CIFAR10和Adversarial_ examples两个类，其中CIFAR10包含了训练和测试数据，Adversarial_examples可以将对应的一个数据集转换为给定模型的对抗样本数据集
+
+### 模型
+&emsp;&emsp;搭建了一个简单的卷积神经网络，定义在`model.py`中，同时在`model.py`中定义了PGD，可以将输入的一个batch的图片转换为对抗样本
+&emsp;&emsp;在`model.py`中，定义了进行模型量化的卷积层和线性层，和动态阈值的ReLu函数，同时，定义了对于模型参数进行正交正则化和谱范数正则化约束的函数
+
+### 训练
+&emsp;&emsp;在`train.py`中定义了train、test函数，分别用来训练和测试
+
+### 可视化结果
+&emsp;&emsp;在`train.py`中，定义了可以展示攻击效图片的函数，在`visualize.py`中，实现了对于PGD三个不同超参数进行绘图的功能
+
 ## 结果
 ### 可视化展示
 &emsp;&emsp;对于没有任何防御措施的模型进行攻击的可视化效果如下
