@@ -325,8 +325,7 @@ class Linear(nn.Linear):
 
 
 class Dynamic_Relu(torch.nn.Module):
-    '''
-    from paper: https://arxiv.org/pdf/2104.03693.pdf
+    '''Dynamic_Relu class from paper: https://arxiv.org/pdf/2104.03693.pdf
     Args:
         N = int - number of intervals contained in function
         momentum = float - strength of momentum during the statistics collection phase
@@ -334,6 +333,13 @@ class Dynamic_Relu(torch.nn.Module):
     '''
 
     def __init__(self, N=16, momentum=0.9, dimensions=3):
+        """The init function of dynamic relu
+
+        Args:
+            N (int, optional): The number of intervals contained in function. Defaults to 16.
+            momentum (float, optional): The strength of momentum during the statistics collection phase. Defaults to 0.9.
+            dimensions (int, optional): The input dimensions. Defaults to 3.
+        """
         super(Dynamic_Relu, self).__init__()
         self.N = N
         self.momentum = momentum

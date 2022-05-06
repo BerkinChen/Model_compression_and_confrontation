@@ -145,9 +145,8 @@ if __name__ == '__main__':
       with open('results.txt', 'a') as f:
          sys.stdout = f
          print('----------' + evn + '-------------')
-         if args.feature_squeeze is not None:
-            test(test_loader, net, loss, feature_squeeze=args.feature_squeeze,device=device)
-            test(ad_data_loader, net, loss, feature_squeeze=args.feature_squeeze,device=device)
+         test(test_loader, net, loss, feature_squeeze=args.feature_squeeze,device=device)
+         test(ad_data_loader, net, loss, feature_squeeze=args.feature_squeeze,device=device)
          print('----------------------------------')
       sys.stdout = ori_stdout
       
